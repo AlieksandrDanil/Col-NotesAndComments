@@ -26,7 +26,6 @@ class NoteServiceTest {
         service.createComment(1, 2, "My Second Comment", deleted = true, 1648924699, 0, 2, 2)
         service.createComment(2, 2, "My Second Comment", deleted = true, 1648924750, 1, 2, 1)
         val result = service.createComment(2, 2, "My Thired Comment", deleted = false, 1648924813, 0, 2, 3)
-
         val expected = 5
         assertEquals(expected, result)
     }
@@ -47,7 +46,7 @@ class NoteServiceTest {
         service.createComment(1, 2, "My Second Comment", deleted = true, 1648924699, 0, 2, 2)
         service.createComment(2, 2, "My Second Comment", deleted = true, 1648924750, 1, 2, 1)
         service.createComment(2, 2, "My Thired Comment", deleted = false, 1648924813, 0, 2, 3)
-        val result = service.delete(1)
+        val result = service.delete(2)
         assertTrue(result)
     }
 
@@ -87,7 +86,7 @@ class NoteServiceTest {
         service.createComment(1, 2, "My Second Comment", deleted = true, 1648924699, 0, 2, 2)
         service.createComment(2, 2, "My Second Comment", deleted = true, 1648924750, 1, 2, 1)
         service.createComment(2, 2, "My Thired Comment", deleted = false, 1648924813, 0, 2, 3)
-        val result = service.deleteComment(3, true)
+        val result = service.deleteComment(5, true)
         assertTrue(result)
     }
 
@@ -107,7 +106,7 @@ class NoteServiceTest {
         service.createComment(1, 2, "My Second Comment", deleted = true, 1648924699, 0, 2, 2)
         service.createComment(2, 2, "My Second Comment", deleted = true, 1648924750, 1, 2, 1)
         service.createComment(2, 2, "My Thired Comment", deleted = false, 1648924813, 0, 2, 3)
-        val result = service.deleteComment(6, false)
+        val result = service.deleteComment(3, false)
         assertFalse(result)
     }
 
@@ -171,7 +170,7 @@ class NoteServiceTest {
         service.createComment(1, 2, "My Second Comment", deleted = true, 1648924699, 0, 2, 2)
         service.createComment(2, 2, "My Second Comment", deleted = true, 1648924750, 1, 2, 1)
         service.createComment(2, 2, "My Thired Comment", deleted = false, 1648924813, 0, 2, 3)
-        val result = service.editComment(4, "My Edited Comment")
+        val result = service.editComment(5, "My Edited Comment")
         assertTrue(result)
     }
 
@@ -276,7 +275,6 @@ class NoteServiceTest {
         service.createComment(2, 2, "My Second Comment of Note-2", deleted = true, 1648924750, 1, 2, 1)
         service.createComment(2, 2, "My Thired Comment of Note-2", deleted = false, 1648924813, 0, 2, 3)
         val result = service.getComments(2,0,1,2)?.toList()
-        println(result)
         assertNotNull(result)
     }
 
@@ -297,7 +295,6 @@ class NoteServiceTest {
         service.createComment(2, 2, "My Second Comment of Note-2", deleted = true, 1648924750, 1, 2, 1)
         service.createComment(2, 2, "My Thired Comment of Note-2", deleted = false, 1648924813, 0, 2, 3)
         val result = service.getComments(4,0,1,2)?.toList()
-        println(result)
         assertNull(result)
     }
 

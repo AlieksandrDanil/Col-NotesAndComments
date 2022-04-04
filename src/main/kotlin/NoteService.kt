@@ -46,6 +46,12 @@ class NoteService {
     }
 
     fun delete(noteId: Int): Boolean {
+        val it = comments.iterator()
+        while (it.hasNext()) {
+            if (it.next().noteId == noteId) {
+                it.remove()
+            }
+        }
         for (note in notes) {
             if (note.noteId == noteId) {
                 notes.remove(note)
@@ -58,7 +64,9 @@ class NoteService {
     fun deleteComment(commentId: Int, flagOfFullDelete: Boolean = false): Boolean {
         for (comment in comments) {
             if (comment.commentId == commentId) {
-                if (flagOfFullDelete) {
+                if (comment.deleted) {
+                    throw NoteOrCommentException("the comment with id $commentId has already been deleted early")
+                } else if (flagOfFullDelete) {
                     comments.remove(comment)
                 } else {
                     comment.deleted = true
@@ -94,7 +102,7 @@ class NoteService {
 
     fun editComment(commentId: Int, message: String): Boolean {
         for (comment in comments) {
-            if (comment.commentId == commentId) {
+            if (comment.commentId == commentId && !comment.deleted) {
                 comment.message = message
                 return true
             }
